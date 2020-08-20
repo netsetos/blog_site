@@ -1,0 +1,44 @@
+{% load blog_tags %}
+{% load static %}
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static "css/blog.css" %}" rel="stylesheet">
+</head>
+<body>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <div id="sidebar">
+    <h2>NetsetOs blog</h2>
+    <p>Netsetos is an online educational platform where we provide free video tutorials on computer programming languages and tech topics. We come up each day with new and quality content.
+      Our attempt is to teach basics which took us ages to learn.</p>
+
+    <p>We are a techy enthusiast team. Ex Oracle. Having a vast experience in Java Python with SCJP and GCP Certified Professional with 10 years of Corporate Experience.</p>
+
+    <p>Trying to sum up my experiences in the form of videos.</p>
+    <p>Our aim is to make the learner understand the topic from very basics because we know the first step is very important towards any learning.</p>
+
+<p>Here you can have several topics related to Python, Java, Data Structure & Algo, Data Science, So the mulmantra of this channel to practice , practice and practice.</p>
+    <p>I've written {% total_posts %} posts so far</p>
+
+      <p>
+          <a href="{% url "blog:post_feed" %}">Subscribe to my RSS Feed</a>
+      </p>
+      
+    <h3>Latest Posts</h3>
+    {% show_latest_posts 3 %}
+
+    <h3>Most Commented Posts</h3>
+    {% get_most_commented_posts as most_commented_posts %}
+    <ul>
+      {% for post in most_commented_posts %}
+      <li>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
